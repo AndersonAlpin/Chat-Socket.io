@@ -50,9 +50,20 @@
     socket.on('showmsg', (data) => {
         let chat = document.getElementById("chat");
         let p = document.createElement("p");
-        p.innerHTML = '<b>' + data.username + '</b>' + ': ' + data.msg;
-        chat.append(p);
-        chat.scrollTop = chat.scrollHeight;
+        let username;
+
+        if (data.username.trim() != '') {
+            username = data.username;
+        } else {
+            username = 'Anônimo';
+        }
+
+        if (data.msg.trim() != '') {
+            p.innerHTML = '<b>' + username + '</b>' + ': ' + data.msg;
+            chat.append(p);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
     });
 
     function enviar() {
